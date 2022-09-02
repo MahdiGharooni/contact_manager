@@ -147,6 +147,7 @@ class ThemeManager {
   static const Color primaryColor = Color.fromRGBO(44, 49, 54, 1.0);
   static const Color primaryColorLight = Color.fromRGBO(71, 79, 87, 1.0);
   static const Color secondaryColor = Color.fromRGBO(255, 155, 0, 1.0);
+  static const Color accentColor = Color.fromRGBO(46, 184, 154, 1.0);
 
   static const MaterialColor _lightGreyColor = MaterialColor(0xFF959595, {
     50: Color(0xFFFFFFFF), //Scaffold/Page Background.
