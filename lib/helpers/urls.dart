@@ -1,1 +1,1 @@
-const String getAllContactsUrl = '/contacts';
+const String contactsUrl = '/contacts';

@@ -24,3 +24,14 @@ class GetAllContactsSuccessfulState extends ContactManagerState {
 
   final List<Contact> contacts;
 }
+
+/// add contact
+class AddContactsLoadingState extends ContactManagerState {}
+
+class AddContactsErrorState extends ContactManagerState {
+  const AddContactsErrorState({required this.msg});
+
+  final String msg;
+}
+
+class AddContactsSuccessfulState extends ContactManagerState {}

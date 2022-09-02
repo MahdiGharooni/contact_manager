@@ -71,7 +71,7 @@ class ThemeManager {
         actionTextColor: _lightGreyColor.shade50,
       ),
       buttonTheme: ButtonThemeData(
-        buttonColor: _darkAccentColor,
+        buttonColor: accentColor,
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: _darkAccentColor,
         ),

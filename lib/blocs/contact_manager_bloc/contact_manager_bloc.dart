@@ -16,9 +16,28 @@ class ContactManagerBloc
   @override
   Stream<ContactManagerState> mapEventToState(
       ContactManagerEvent event) async* {
+    /// get all contacts
     if (event is GetAllContactsEvent) {
       yield GetAllContactsLoadingState();
       final ResponseBase res = await networkRepository.getAllContacts();
+      if (res.statusCode == 200) {
+        contacts = res.data as List<Contact>;
+        yield GetAllContactsSuccessfulState(contacts: contacts);
+      } else {
+        yield const GetAllContactsErrorState(msg: connectionError);
+      }
+
+      /// add contact
+    } else if (event is AddContactEvent) {
+      yield AddContactsLoadingState();
+      final ResponseBase res = await networkRepository.addContact(
+        event.firstName,
+        event.lastName,
+        event.email,
+        event.phone,
+        event.notes,
+        event.image,
+      );
       if (res.statusCode == 200) {
         contacts = res.data as List<Contact>;
         yield GetAllContactsSuccessfulState(contacts: contacts);
@@ -31,6 +50,7 @@ class ContactManagerBloc
   List<Contact> _contacts = [];
 
   List<Contact> get contacts => _contacts;
+
   set contacts(List<Contact> value) {
     _contacts = value;
   }

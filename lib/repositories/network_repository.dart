@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 
 class NetworkRepository extends NetworkRepositoryBase {
   Future<ResponseBase> getAllContacts() async {
-    final Response res = await getJSON(path: getAllContactsUrl);
+    final Response res = await getJSON(path: contactsUrl);
 
     if (res.statusCode == 200) {
       final List<dynamic> data = jsonDecode(res.body);
@@ -19,6 +19,32 @@ class NetworkRepository extends NetworkRepositoryBase {
       return ResponseBase(data: _contacts, statusCode: res.statusCode);
     } else {
       return ResponseBase(data: [], statusCode: res.statusCode);
+    }
+  }
+
+  Future<ResponseBase> addContact(String firstName, String lastName,
+      String email, String phone, String notes,
+      [String image = '']) async {
+    final dynamic res = await postJSON(
+      path: contactsUrl,
+      body: {
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "phone": phone,
+        "notes": notes,
+        // "images": null,
+      },
+    );
+
+    if (res.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(res.body);
+      return ResponseBase(data: data, statusCode: res.statusCode);
+    } else {
+      return ResponseBase(
+          data: [],
+          statusCode: res.statusCode,
+          message: jsonDecode(res.body)['message'] ?? '');
     }
   }
 }
