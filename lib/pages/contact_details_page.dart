@@ -1,50 +1,56 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/models/contact.dart';
+import 'package:contact_manager/widgets/contact_avatar.dart';
 import 'package:flutter/material.dart';
 
 class ContactDetailsPage extends StatelessWidget {
-  const ContactDetailsPage({required this.contact, Key? key}) : super(key: key);
+  const ContactDetailsPage({
+    required this.contact,
+    required Key key,
+  }) : super(key: key);
 
   final Contact contact;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
-                child: CachedNetworkImage(
-                  imageUrl: contact.images.isNotEmpty ? contact.images[0] : '',
-                  cacheKey: contact.images.isNotEmpty ? contact.images[0] : '',
-                  fit: BoxFit.fill,
-                  height: 150,
-                  width: 150,
-                  errorWidget: (context, a, b) =>
-                      Image.asset('assets/images/contact.png'),
-                  placeholder: (context, a) =>
-                      Image.asset('assets/images/contact.png'),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              //todo
+            },
+          )
+        ],
+      ),
+      body: Card(
+        child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ContactAvatar(
+                  url: contact.images.isNotEmpty ? contact.images[0] : '',
+                  size: 150,
+                  key: Key(contact.id),
                 ),
-              ),
-              const SizedBox(height: 24),
-              _getInfo('FirstName:', contact.firstName, Icons.person),
-              _getInfo('LastName:', contact.lastName, Icons.person),
-              _getInfo('Phone:', contact.phone, Icons.phone),
-              _getInfo('Email:', contact.email, Icons.email),
-              _getInfo('Notes:', contact.notes, Icons.description),
-            ],
+                const SizedBox(height: 24),
+                _getInfo('FirstName:', contact.firstName, Icons.person),
+                _getInfo('LastName:', contact.lastName, Icons.person),
+                _getInfo('Phone:', contact.phone, Icons.phone),
+                _getInfo('Email:', contact.email, Icons.email),
+                _getInfo('Notes:', contact.notes, Icons.description, false),
+              ],
+            ),
           ),
+          padding: const EdgeInsets.all(24),
         ),
-        padding: const EdgeInsets.all(24),
       ),
     );
   }
 
-  Widget _getInfo(String title, String value, IconData icon) {
+  Widget _getInfo(String title, String value, IconData icon,
+      [hasDivider = true]) {
     return Column(
       children: [
         const SizedBox(height: 8),
@@ -76,7 +82,7 @@ class ContactDetailsPage extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(),
+        if (hasDivider) const Divider(),
       ],
       crossAxisAlignment: CrossAxisAlignment.start,
     );

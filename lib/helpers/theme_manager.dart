@@ -7,6 +7,7 @@ class ThemeManager {
         iconTheme: IconThemeData(
           color: _darkGreyColor.shade900,
         ),
+        color: accentColor,
       ),
       dialogTheme: DialogTheme(
         titleTextStyle: TextStyle(
@@ -58,6 +59,12 @@ class ThemeManager {
       errorColor: Colors.red,
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.transparent,
+      ),
+      cardTheme: CardTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        elevation: 0.5,
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       snackBarTheme: SnackBarThemeData(

@@ -1,4 +1,6 @@
 import 'package:contact_manager/blocs/blocs.dart';
+import 'package:contact_manager/models/contact.dart';
+import 'package:contact_manager/widgets/home_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,22 +24,24 @@ class HomePage extends StatelessWidget {
                 : (state is GetAllContactsSuccessfulState)
                     ? ListView.builder(
                         itemBuilder: (context, index) {
-                          return Container(
-                            child: Text(state.contacts[index].firstName),
-                            padding: const EdgeInsets.all(24),
-                          );
+                          final Contact _contact = state.contacts[index];
+                          return HomeCardWidget(
+                              contact: _contact, key: Key(_contact.id));
                         },
                         itemCount: state.contacts.length,
                       )
                     : Container(),
           );
         },
-        listener: (context, state) {},
+        listener: (context, state) {
+          //todo
+        },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
         tooltip: 'Add Contact',
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text('Add Contact'),
       ),
     );
   }
