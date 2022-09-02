@@ -1,5 +1,6 @@
 import 'package:contact_manager/blocs/blocs.dart';
 import 'package:contact_manager/models/contact.dart';
+import 'package:contact_manager/pages/contact_add_page.dart';
 import 'package:contact_manager/widgets/home_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,14 @@ class HomePage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) => ContactAddPage(),
+            ),
+          );
+        },
         tooltip: 'Add Contact',
         icon: const Icon(Icons.add),
         label: const Text('Add Contact'),
