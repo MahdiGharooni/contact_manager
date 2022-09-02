@@ -29,9 +29,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc: any
+  flutter_bloc: ^7.0.0
+  equatable: any
   http: any
   shimmer: any
+  connectivity_plus: any
 
 
   # The following adds the Cupertino Icons font to your application.
