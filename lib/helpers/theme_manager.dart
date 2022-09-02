@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ThemeManager {
@@ -7,8 +8,15 @@ class ThemeManager {
         iconTheme: IconThemeData(
           color: _darkGreyColor.shade900,
         ),
+        titleTextStyle: const TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
         color: accentColor,
       ),
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: accentColor),
       dialogTheme: DialogTheme(
         titleTextStyle: TextStyle(
           color: _darkGreyColor.shade800,
@@ -153,8 +161,8 @@ class ThemeManager {
 
   static const Color primaryColor = Color.fromRGBO(44, 49, 54, 1.0);
   static const Color primaryColorLight = Color.fromRGBO(71, 79, 87, 1.0);
-  static const Color secondaryColor = Color.fromRGBO(255, 155, 0, 1.0);
-  static const Color accentColor = Color.fromRGBO(46, 184, 154, 1.0);
+  static const Color secondaryColor = Color.fromRGBO(46, 184, 154, 1.0);
+  static const Color accentColor = Color.fromRGBO(255, 155, 0, 1.0);
 
   static const MaterialColor _lightGreyColor = MaterialColor(0xFF959595, {
     50: Color(0xFFFFFFFF), //Scaffold/Page Background.

@@ -34,4 +34,8 @@ class AddContactsErrorState extends ContactManagerState {
   final String msg;
 }
 
-class AddContactsSuccessfulState extends ContactManagerState {}
+class AddContactsSuccessfulState extends ContactManagerState {
+  const AddContactsSuccessfulState({required this.msg});
+
+  final String msg;
+}

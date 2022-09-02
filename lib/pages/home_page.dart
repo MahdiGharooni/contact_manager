@@ -1,4 +1,5 @@
 import 'package:contact_manager/blocs/blocs.dart';
+import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/pages/contact_add_page.dart';
 import 'package:contact_manager/widgets/home_card_widget.dart';
@@ -35,7 +36,13 @@ class HomePage extends StatelessWidget {
           );
         },
         listener: (context, state) {
-          //todo
+          if (state is AddContactsSuccessfulState) {
+            SnackBar(
+              content: Text(state.msg),
+              backgroundColor: ThemeManager.secondaryColor,
+            );
+            _bloc.add(GetAllContactsEvent());
+          }
         },
       ),
       floatingActionButton: FloatingActionButton.extended(

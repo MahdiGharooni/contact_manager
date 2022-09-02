@@ -38,11 +38,10 @@ class ContactManagerBloc
         event.notes,
         event.image,
       );
-      if (res.statusCode == 200) {
-        contacts = res.data as List<Contact>;
-        yield GetAllContactsSuccessfulState(contacts: contacts);
+      if (res.statusCode == 201) {
+        yield const AddContactsSuccessfulState(msg: contactAddedSuccessfully);
       } else {
-        yield const GetAllContactsErrorState(msg: connectionError);
+        yield AddContactsErrorState(msg: res.message ?? connectionError);
       }
     }
   }

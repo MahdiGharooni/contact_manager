@@ -27,12 +27,17 @@ class HomeCardWidget extends StatelessWidget {
               const SizedBox(width: 24),
               Column(
                 children: [
-                  Text(
-                    contact.firstName + contact.lastName,
-                    style:
-                        ThemeManager.getTheme().textTheme.subtitle2!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                  Container(
+                    child: Text(
+                      contact.firstName + contact.lastName,
+                      style:
+                          ThemeManager.getTheme().textTheme.subtitle2!.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    width: MediaQuery.of(context).size.width * 2 / 3,
                   ),
                   Text(contact.phone),
                 ],

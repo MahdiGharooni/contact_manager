@@ -15,7 +15,7 @@ class ContactAvatar extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(100.0),
       child: CachedNetworkImage(
-        imageUrl: url,
+        imageUrl: url.contains('http') ? url : '',
         cacheKey: url,
         fit: BoxFit.fill,
         height: size,

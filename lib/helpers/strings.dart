@@ -7,3 +7,4 @@ const String phoneIsMandatory = 'Phone Number Is Mandatory';
 const String emailIsMandatory = 'Email Is Mandatory';
 const String phoneIsNotValid = 'Phone Number Is Not Valid';
 const String emailIsNotValid = 'Email Is Not Valid';
+const String contactAddedSuccessfully = 'Contact Added Successfully';

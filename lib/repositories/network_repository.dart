@@ -37,7 +37,7 @@ class NetworkRepository extends NetworkRepositoryBase {
       },
     );
 
-    if (res.statusCode == 200) {
+    if (res.statusCode == 201) {
       final List<dynamic> data = jsonDecode(res.body);
       return ResponseBase(data: data, statusCode: res.statusCode);
     } else {
