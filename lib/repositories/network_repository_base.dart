@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class NetworkRepositoryBase {
   Future<http.Response> getJSON<T>({required String path}) async {
@@ -12,7 +13,6 @@ class NetworkRepositoryBase {
 
   Future<http.Response> deleteJSON<T>({
     required String path,
-
   }) async {
     final res = await http.delete(
       Uri.parse('https://stdevtask3-0510.restdb.io/rest' + path),
@@ -22,9 +22,9 @@ class NetworkRepositoryBase {
     return res;
   }
 
-    Future<http.Response> putJSON<T>({
+  Future<http.Response> putJSON<T>({
     required String path,
-      required Map<String, dynamic> body,
+    required Map<String, dynamic> body,
   }) async {
     final res = await http.put(
       Uri.parse('https://stdevtask3-0510.restdb.io/rest' + path),
@@ -35,11 +35,10 @@ class NetworkRepositoryBase {
     return res;
   }
 
-
-
   Future<dynamic> postJSON<T>({
     required String path,
-    required Map<String, dynamic> body,
+    required Map<String, String> body,
+    XFile? image,
   }) async {
     // final res = await dio.Dio().post(
     //   'https://stdevtask3-0510.restdb.io/rest' + path,
@@ -53,14 +52,31 @@ class NetworkRepositoryBase {
     //   data: body,
     // );
 
-    final res = await http.post(
-      Uri.parse('https://stdevtask3-0510.restdb.io/rest' + path),
-      body: body,
-      headers: {
-        'APIKEY': 'a5b39dedacbffd95e1421020dae7c8b5ac3cc',
-      },
-    );
+    // final res = await http.post(
+    //   Uri.parse('https://stdevtask3-0510.restdb.io/rest' + path),
+    //   body: body,
+    //   headers: {
+    //     'APIKEY': 'a5b39dedacbffd95e1421020dae7c8b5ac3cc',
+    //   },
+    // );
 
-    return res;
+    var request = http.MultipartRequest('POST', Uri.parse('https://stdevtask3-0510.restdb.io/rest' + path));
+    request.files.add(await http.MultipartFile.fromPath('images', image!.path,
+        filename: 'avatar.png'));
+
+    request.headers.addAll(
+      {'APIKEY': 'a5b39dedacbffd95e1421020dae7c8b5ac3cc'},
+    );
+    request.fields.addAll(body );
+
+     await request.send().then((value) {
+
+      final json = value.stream.bytesToString();
+
+      return json;
+    });
+
+
+
   }
 }

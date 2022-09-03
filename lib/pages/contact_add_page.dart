@@ -1,22 +1,31 @@
 import 'package:contact_manager/blocs/blocs.dart';
-import 'package:contact_manager/blocs/contact_manager_bloc/contact_manager_bloc.dart';
 import 'package:contact_manager/helpers/strings.dart';
 import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/helpers/widget_utils.dart';
+import 'package:contact_manager/widgets/contact_avatar.dart';
+import 'package:contact_manager/widgets/file_avatar.dart';
 import 'package:contact_manager/widgets/text_form_fields/email_text_form_field.dart';
 import 'package:contact_manager/widgets/text_form_fields/name_text_form_field.dart';
 import 'package:contact_manager/widgets/text_form_fields/phone_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ContactAddPage extends StatelessWidget with WidgetUtils {
-  ContactAddPage({Key? key}) : super(key: key);
+class ContactAddPage extends StatefulWidget {
+  const ContactAddPage({Key? key}) : super(key: key);
 
+  @override
+  State<ContactAddPage> createState() => _ContactAddPageState();
+}
+
+class _ContactAddPageState extends State<ContactAddPage> with WidgetUtils {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  XFile? _file;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +62,22 @@ class ContactAddPage extends StatelessWidget with WidgetUtils {
               key: formKey,
               child: Column(
                 children: [
+                  GestureDetector(
+                    child: _file != null
+                        ? FileAvatar(
+                            file: _file!,
+                            size: 150,
+                          )
+                        : const ContactAvatar(
+                            url: '',
+                            size: 150,
+                            key: Key(''),
+                          ),
+                    onTap: () {
+                      _pickImage(true);
+                    },
+                  ),
+                  const SizedBox(height: 24),
                   NameTextFormField(
                     controller: _firstNameController,
                     labelText: 'First Name',
@@ -84,6 +109,7 @@ class ContactAddPage extends StatelessWidget with WidgetUtils {
                           email: _emailController.text,
                           phone: _phoneController.text,
                           notes: _notesController.text,
+                          image: _file,
                         ));
                       }
                     },
@@ -97,5 +123,18 @@ class ContactAddPage extends StatelessWidget with WidgetUtils {
         ),
       ),
     );
+  }
+
+  void _pickImage(bool preferCamera) async {
+    final XFile? file = await ImagePicker().pickImage(
+        source:
+            preferCamera == true ? ImageSource.camera : ImageSource.gallery);
+
+    if(file!=null && file.path.isNotEmpty){
+      setState(() {
+        _file = file;
+      });
+    }
+
   }
 }

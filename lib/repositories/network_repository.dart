@@ -5,6 +5,7 @@ import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/models/response_base.dart';
 import 'package:contact_manager/repositories/network_repository_base.dart';
 import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NetworkRepository extends NetworkRepositoryBase {
   Future<ResponseBase> getAllContacts() async {
@@ -24,7 +25,7 @@ class NetworkRepository extends NetworkRepositoryBase {
 
   Future<ResponseBase> addContact(String firstName, String lastName,
       String email, String phone, String notes,
-      [String image = '']) async {
+      XFile? image ) async {
     final dynamic res = await postJSON(
       path: contactsUrl,
       body: {
@@ -33,8 +34,8 @@ class NetworkRepository extends NetworkRepositoryBase {
         "email": email,
         "phone": phone,
         "notes": notes,
-        // "images": null,
       },
+      image: image,
     );
 
     if (res.statusCode == 201) {

@@ -1,5 +1,6 @@
 import 'package:contact_manager/models/contact.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class ContactManagerEvent extends Equatable {
   const ContactManagerEvent();
@@ -19,7 +20,7 @@ class AddContactEvent extends ContactManagerEvent {
     required this.email,
     required this.phone,
     required this.notes,
-    this.image = '',
+    this.image ,
   });
 
   final String firstName;
@@ -27,7 +28,7 @@ class AddContactEvent extends ContactManagerEvent {
   final String email;
   final String phone;
   final String notes;
-  final String image;
+  final XFile? image;
 }
 
 /// delete contact

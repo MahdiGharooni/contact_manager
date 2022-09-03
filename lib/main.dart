@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late StreamSubscription subscription;
-  bool _hasInternet = false;
+  bool _hasInternet = true;
 
   @override
   void initState() {
