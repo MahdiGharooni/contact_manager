@@ -39,7 +39,6 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         home: _hasInternet
             ? const SplashPage()
-            // const SafeArea(child: HomePage(title: 'Contact Manager'))
             : const OfflinePage(title: 'Contact Manager'),
         theme: ThemeManager.getTheme(),
         debugShowCheckedModeBanner: false,

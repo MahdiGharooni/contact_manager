@@ -39,22 +39,22 @@ class _OfflinePageState extends State<OfflinePage> {
             const SizedBox(
               height: 16,
             ),
-            InkWell(
+            GestureDetector(
               child: Container(
                   child: _timerStarted
                       ? Container(
-                          child: const CircularProgressIndicator(
-                            color: Colors.white,
+                          child: CircularProgressIndicator(
+                            color: ThemeManager.darkCursorColor.shade100,
                             strokeWidth: 3,
                           ),
                           width: 18,
                           height: 18,
                           margin: const EdgeInsets.symmetric(horizontal: 6),
                         )
-                      : const Text(
+                      : Text(
                           retry,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: ThemeManager.darkCursorColor.shade100,
                           ),
                         ),
                   padding:
