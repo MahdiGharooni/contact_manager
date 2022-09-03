@@ -37,10 +37,11 @@ class HomePage extends StatelessWidget {
         },
         listener: (context, state) {
           if (state is AddContactsSuccessfulState) {
-            SnackBar(
+            final snackBar  = SnackBar(
               content: Text(state.msg),
               backgroundColor: ThemeManager.secondaryColor,
             );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
             _bloc.add(GetAllContactsEvent());
           }
         },

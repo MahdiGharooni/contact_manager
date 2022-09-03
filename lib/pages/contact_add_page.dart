@@ -28,10 +28,11 @@ class ContactAddPage extends StatelessWidget with WidgetUtils {
           }
           if (state is AddContactsErrorState) {
             hideLoading(context);
-            SnackBar(
+          final snackBar =   SnackBar(
               content: Text(state.msg),
               backgroundColor: ThemeManager.getTheme().errorColor,
             );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
           if (state is AddContactsSuccessfulState) {
             hideLoading(context);

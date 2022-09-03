@@ -38,7 +38,7 @@ class NetworkRepository extends NetworkRepositoryBase {
     );
 
     if (res.statusCode == 201) {
-      final List<dynamic> data = jsonDecode(res.body);
+      final Contact data = Contact.fromJson(jsonDecode(res.body) );
       return ResponseBase(data: data, statusCode: res.statusCode);
     } else {
       return ResponseBase(

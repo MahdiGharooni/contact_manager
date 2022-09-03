@@ -2,7 +2,6 @@ import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/pages/contact_details_page.dart';
 import 'package:contact_manager/widgets/contact_avatar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeCardWidget extends StatelessWidget {
@@ -27,18 +26,19 @@ class HomeCardWidget extends StatelessWidget {
               const SizedBox(width: 24),
               Column(
                 children: [
-                  Container(
-                    child: Text(
-                      contact.firstName + contact.lastName,
-                      style:
-                          ThemeManager.getTheme().textTheme.subtitle2!.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    width: MediaQuery.of(context).size.width * 2 / 3,
-                  ),
+                  SizedBox(
+                      child: Text(
+                        contact.firstName + contact.lastName,
+                        style: ThemeManager.getTheme()
+                            .textTheme
+                            .subtitle2!
+                            .copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      width: MediaQuery.of(context).size.width / 2),
                   Text(contact.phone),
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
