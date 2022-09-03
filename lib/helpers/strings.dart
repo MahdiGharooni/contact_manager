@@ -5,7 +5,6 @@ const String yes = 'Yes';
 const String no = 'No';
 const String email = 'Email';
 const String phoneNumber = 'Phone Number';
-
 const String networkUnavailable =
     'Your network is unavailable.\nCheck your data or wifi connection.';
 const String retry = 'Retry';
