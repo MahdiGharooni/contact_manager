@@ -1,4 +1,5 @@
 const String connectionError = 'connection error';
+const String login = 'Login';
 const String yes = 'Yes';
 const String no = 'No';
 
@@ -14,4 +15,7 @@ const String contactAddedSuccessfully = 'Contact Added Successfully';
 const String contactDeletedSuccessfully = 'Contact Deleted Successfully';
 const String contactEditedSuccessfully = 'Contact Edited Successfully';
 const String deleteContact = 'Delete Contact';
+const String exit = 'Exit';
 const String areYouSureFromDeletingThisContact = 'Are you sure from deleting this contact?';
+const String areYouSureFromExitingTheApp = 'Are you sure from exiting the app?';
+const String press2TimesFormExit = 'For Exit Press 2 Times Back Button';

@@ -2,8 +2,8 @@ import 'package:contact_manager/blocs/blocs.dart';
 import 'package:contact_manager/helpers/strings.dart';
 import 'package:flutter/material.dart';
 
-class YesNoDialog extends StatelessWidget {
-  const YesNoDialog({required this.id, Key? key}) : super(key: key);
+class DeleteContactDialog extends StatelessWidget {
+  const DeleteContactDialog({required this.id, Key? key}) : super(key: key);
 
   final String id;
 

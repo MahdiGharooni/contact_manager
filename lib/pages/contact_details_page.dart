@@ -4,7 +4,7 @@ import 'package:contact_manager/helpers/widget_utils.dart';
 import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/pages/contact_edit_page.dart';
 import 'package:contact_manager/widgets/contact_avatar.dart';
-import 'package:contact_manager/widgets/yes_no_dialog.dart';
+import 'package:contact_manager/widgets/delete_contact_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ContactDetailsPage extends StatelessWidget with WidgetUtils {
@@ -38,7 +38,7 @@ class ContactDetailsPage extends StatelessWidget with WidgetUtils {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => YesNoDialog(id: contact.id),
+                builder: (context) => DeleteContactDialog(id: contact.id),
               );
             },
           ),
