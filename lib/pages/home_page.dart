@@ -3,6 +3,7 @@ import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/pages/contact_add_page.dart';
 import 'package:contact_manager/widgets/empty_widget.dart';
 import 'package:contact_manager/widgets/home_card_widget.dart';
+import 'package:contact_manager/widgets/home_shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,8 +22,13 @@ class HomePage extends StatelessWidget {
       body: BlocConsumer<ContactManagerBloc, ContactManagerState>(
         builder: (context, state) {
           return Center(
-            child: (state is GetAllContactsLoadingState)
-                ? const CircularProgressIndicator()
+            child: true
+                ? ListView.builder(
+                    itemBuilder: (context, index) {
+                      return const HomeShimmerWidget();
+                    },
+                    itemCount: 15,
+                  )
                 : _bloc.contacts.isNotEmpty
                     ? RefreshIndicator(
                         child: ListView.builder(

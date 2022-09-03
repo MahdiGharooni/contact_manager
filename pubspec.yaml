@@ -35,8 +35,8 @@ dependencies:
   shimmer: any
   connectivity_plus: any
   cached_network_image: any
-  dio: any
   flutter_launcher_icons: any
+  shared_preferences: any
 
 
   # The following adds the Cupertino Icons font to your application.

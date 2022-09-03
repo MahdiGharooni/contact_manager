@@ -139,7 +139,6 @@ class ThemeManager {
           fontWeight: FontWeight.bold,
         ),
       ).apply(),
-      primarySwatch: _darkCursorColor,
       primaryColor: _darkGreyColor.shade50,
       iconTheme: IconThemeData(color: _darkGreyColor.shade900),
       primaryIconTheme: const IconThemeData(color: primaryColor),
@@ -191,7 +190,7 @@ class ThemeManager {
     900: Color(0xFFFFFFFF), //Scaffold/Page Background.
   });
 
-  static const MaterialColor _darkCursorColor = MaterialColor(0xFFFFFFFF, {
+  static const MaterialColor darkCursorColor = MaterialColor(0xFFFFFFFF, {
     50: Color(0xFF000000), // Placeholder.
     100: Color(0xFF171717),
     200: Color(0xFF2C2C2C),
@@ -203,6 +202,7 @@ class ThemeManager {
     800: Color(0xFFF4F4F4),
     900: Color(0xFFFFFFFF), //Scaffold/Page Background.
   });
+
   static const MaterialColor _darkAccentColor = MaterialColor(0xFF1F7D69, {
     100: Color(0xFFC2F0E6),
     200: Color(0xFFC2F0E6),
