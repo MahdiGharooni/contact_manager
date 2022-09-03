@@ -1,7 +1,12 @@
+const String apiKey = 'a5b39dedacbffd95e1421020dae7c8b5ac3cc';
 const String connectionError = 'connection error';
 const String login = 'Login';
 const String yes = 'Yes';
 const String no = 'No';
+const String email = 'Email';
+const String phoneNumber = 'Phone Number';
+
+
 
 const String networkUnavailable =
     'Your network is unavailable.\nCheck your data or wifi connection.';

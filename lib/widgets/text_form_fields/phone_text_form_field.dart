@@ -20,8 +20,8 @@ class PhoneTextFormField extends StatelessWidget {
       validator: _validator,
       controller: controller,
       decoration: const InputDecoration(
-        labelText: 'Phone Number',
-        hintText: 'Phone Number',
+        labelText: phoneNumber,
+        hintText: phoneNumber,
         hintTextDirection: TextDirection.ltr,
         counterText: '',
         contentPadding: EdgeInsets.all(16),

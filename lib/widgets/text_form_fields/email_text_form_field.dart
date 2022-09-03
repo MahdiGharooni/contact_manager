@@ -19,8 +19,8 @@ class EmailTextFormField extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       style: const TextStyle(fontSize: 14),
       decoration: const InputDecoration(
-        labelText: 'Email',
-        hintText: 'Email',
+        labelText: email,
+        hintText: email,
         contentPadding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         counterText: '',
       ),
