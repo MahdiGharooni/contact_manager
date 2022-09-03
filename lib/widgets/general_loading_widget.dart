@@ -6,11 +6,11 @@ class GeneralLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: CircularProgressIndicator(
-        backgroundColor: ThemeManager.primaryColorLight,
+        backgroundColor: ThemeManager.darkCursorColor.shade300,
         valueColor: AlwaysStoppedAnimation(
-          ThemeManager.primaryColorLight,
+          ThemeManager.darkCursorColor.shade100,
         ),
       ),
     );
