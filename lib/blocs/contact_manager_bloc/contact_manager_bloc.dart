@@ -52,9 +52,22 @@ class ContactManagerBloc
         event.id,
       );
       if (res.statusCode == 200) {
-        yield const DeleteContactSuccessfulState(msg: contactDeletedSuccessfully);
+        yield const DeleteContactSuccessfulState(
+            msg: contactDeletedSuccessfully);
       } else {
         yield DeleteContactErrorState(msg: res.message ?? connectionError);
+      }
+    }
+
+    /// edit contact
+    else if (event is EditContactEvent) {
+      yield EditContactLoadingState();
+      final ResponseBase res =
+          await networkRepository.editContact(event.contact);
+      if (res.statusCode == 200) {
+        yield const EditContactSuccessfulState(msg: contactEditedSuccessfully);
+      } else {
+        yield EditContactErrorState(msg: res.message ?? connectionError);
       }
     }
   }

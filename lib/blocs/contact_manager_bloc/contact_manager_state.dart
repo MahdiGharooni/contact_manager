@@ -54,3 +54,18 @@ class DeleteContactSuccessfulState extends ContactManagerState {
 
   final String msg;
 }
+
+/// edit contact
+class EditContactLoadingState extends ContactManagerState {}
+
+class EditContactErrorState extends ContactManagerState {
+  const EditContactErrorState({required this.msg});
+
+  final String msg;
+}
+
+class EditContactSuccessfulState extends ContactManagerState {
+  const EditContactSuccessfulState({required this.msg});
+
+  final String msg;
+}

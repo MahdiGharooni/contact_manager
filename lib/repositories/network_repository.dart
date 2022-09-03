@@ -63,4 +63,28 @@ class NetworkRepository extends NetworkRepositoryBase {
           message: jsonDecode(res.body)['message'] ?? '');
     }
   }
+
+    Future<ResponseBase> editContact(Contact contact) async {
+    final dynamic res = await putJSON(
+      path: '$contactsUrl/${contact.id}',
+      body:  {
+        "firstName": contact.firstName ,
+        "lastName": contact.lastName ,
+        "email": contact.email ,
+        "phone": contact.phone ,
+        "notes": contact.notes ,
+      },
+    );
+
+    if (res.statusCode == 200) {
+      return ResponseBase(data: {}, statusCode: res.statusCode);
+    } else {
+      return ResponseBase(
+          data: {},
+          statusCode: res.statusCode,
+          message: jsonDecode(res.body)['message'] ?? '');
+    }
+  }
+
+
 }

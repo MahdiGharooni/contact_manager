@@ -1,3 +1,4 @@
+import 'package:contact_manager/models/contact.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ContactManagerEvent extends Equatable {
@@ -34,4 +35,11 @@ class DeleteContactEvent extends ContactManagerEvent {
   const DeleteContactEvent({required this.id});
 
   final String id;
+}
+
+/// edit contact
+class EditContactEvent extends ContactManagerEvent {
+  const EditContactEvent({required this.contact});
+
+  final Contact contact;
 }
