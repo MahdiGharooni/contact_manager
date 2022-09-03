@@ -24,20 +24,25 @@ class HomePage extends StatelessWidget {
             child: (state is GetAllContactsLoadingState)
                 ? const CircularProgressIndicator()
                 : (state is GetAllContactsSuccessfulState)
-                    ? ListView.builder(
-                        itemBuilder: (context, index) {
-                          final Contact _contact = state.contacts[index];
-                          return HomeCardWidget(
-                              contact: _contact, key: Key(_contact.id));
+                    ? RefreshIndicator(
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            final Contact _contact = state.contacts[index];
+                            return HomeCardWidget(
+                                contact: _contact, key: Key(_contact.id));
+                          },
+                          itemCount: state.contacts.length,
+                        ),
+                        onRefresh: () async {
+                          _bloc.add(GetAllContactsEvent());
                         },
-                        itemCount: state.contacts.length,
                       )
                     : Container(),
           );
         },
         listener: (context, state) {
           if (state is AddContactsSuccessfulState) {
-            final snackBar  = SnackBar(
+            final snackBar = SnackBar(
               content: Text(state.msg),
               backgroundColor: ThemeManager.secondaryColor,
             );

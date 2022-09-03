@@ -6,7 +6,7 @@ class ThemeManager {
     return ThemeData(
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(
-          color: _darkGreyColor.shade900,
+          color: _darkGreyColor.shade50,
         ),
         titleTextStyle: const TextStyle(
           color: Colors.black87,
