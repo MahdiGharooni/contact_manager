@@ -10,12 +10,12 @@ class Contact {
   });
 
   final String id;
-  final String firstName;
-  final String lastName;
-  final String phone;
-  final String email;
-  final String notes;
-  final List<String> images;
+  String firstName;
+  String lastName;
+  String phone;
+  String email;
+  String notes;
+  List<String> images;
 
   factory Contact.fromJson(Map<String, dynamic> json) {
     List<String> _images = [];

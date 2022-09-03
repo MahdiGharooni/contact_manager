@@ -1,5 +1,6 @@
 import 'package:contact_manager/blocs/blocs.dart';
 import 'package:contact_manager/blocs/contact_manager_bloc/contact_manager_bloc.dart';
+import 'package:contact_manager/helpers/strings.dart';
 import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/helpers/widget_utils.dart';
 import 'package:contact_manager/widgets/text_form_fields/email_text_form_field.dart';
@@ -86,7 +87,7 @@ class ContactAddPage extends StatelessWidget with WidgetUtils {
                         ));
                       }
                     },
-                    child: const Text('Confirm'),
+                    child: const Text(confirm),
                   ),
                 ],
               ),

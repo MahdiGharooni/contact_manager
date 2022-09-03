@@ -21,19 +21,19 @@ class YesNoDialog extends StatelessWidget {
         TextButton(
           onPressed: () async {
             Navigator.pop(context);
+          },
+          child: const Text(no),
+        ),
+        TextButton(
+          onPressed: () async {
+            Navigator.pop(context);
             BlocProvider.of<ContactManagerBloc>(context)
                 .add(DeleteContactEvent(id: id));
           },
           child: const Text(yes),
         ),
-        TextButton(
-          onPressed: () async {
-            Navigator.pop(context);
-          },
-          child: const Text(no),
-        ),
       ],
-      contentPadding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 12),
+      contentPadding: const EdgeInsetsDirectional.fromSTEB(16, 24, 16, 12),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),

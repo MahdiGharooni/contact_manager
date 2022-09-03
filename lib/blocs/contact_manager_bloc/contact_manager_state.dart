@@ -65,7 +65,8 @@ class EditContactErrorState extends ContactManagerState {
 }
 
 class EditContactSuccessfulState extends ContactManagerState {
-  const EditContactSuccessfulState({required this.msg});
+  const EditContactSuccessfulState({required this.contact, required this.msg});
 
   final String msg;
+  final Contact contact;
 }

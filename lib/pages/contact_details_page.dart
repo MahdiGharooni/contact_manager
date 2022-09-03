@@ -2,6 +2,7 @@ import 'package:contact_manager/blocs/blocs.dart';
 import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/helpers/widget_utils.dart';
 import 'package:contact_manager/models/contact.dart';
+import 'package:contact_manager/pages/contact_edit_page.dart';
 import 'package:contact_manager/widgets/contact_avatar.dart';
 import 'package:contact_manager/widgets/yes_no_dialog.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,19 @@ class ContactDetailsPage extends StatelessWidget with WidgetUtils {
       appBar: AppBar(
         actions: [
           IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (ctx) => ContactEditPage(
+                    contact: contact,
+                  ),
+                ),
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () {
               showDialog(
@@ -27,10 +41,10 @@ class ContactDetailsPage extends StatelessWidget with WidgetUtils {
                 builder: (context) => YesNoDialog(id: contact.id),
               );
             },
-          )
+          ),
         ],
       ),
-      body: BlocListener<ContactManagerBloc, ContactManagerState>(
+      body: BlocConsumer<ContactManagerBloc, ContactManagerState>(
         listener: (context, state) {
           if (state is DeleteContactLoadingState) {
             showLoading(context);
@@ -55,33 +69,44 @@ class ContactDetailsPage extends StatelessWidget with WidgetUtils {
             Navigator.pop(context);
           }
         },
-        child: Card(
-          child: Container(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ContactAvatar(
-                    url: contact.images.isNotEmpty ? contact.images[0] : '',
-                    size: 150,
-                    key: Key(contact.id),
-                  ),
-                  const SizedBox(height: 24),
-                  _getInfo('FirstName:', contact.firstName, Icons.person),
-                  _getInfo('LastName:', contact.lastName, Icons.person),
-                  _getInfo('Phone:', contact.phone, Icons.phone),
-                  _getInfo('Email:', contact.email, Icons.email),
-                  _getInfo('Notes:', contact.notes, Icons.description, false),
-                ],
-              ),
-            ),
-            padding: const EdgeInsets.all(24),
-          ),
-        ),
+        builder: (ctx, state) {
+          if (state is EditContactSuccessfulState &&
+              state.contact.id == contact.id) {
+            return _getInfoCard(state.contact);
+          } else {
+            return _getInfoCard(contact);
+          }
+        },
       ),
     );
   }
 
-  Widget _getInfo(String title, String value, IconData icon,
+  Widget _getInfoCard(Contact contact) {
+    return Card(
+      child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ContactAvatar(
+                url: contact.images.isNotEmpty ? contact.images[0] : '',
+                size: 150,
+                key: Key(contact.id),
+              ),
+              const SizedBox(height: 24),
+              _getInfoRow('FirstName:', contact.firstName, Icons.person),
+              _getInfoRow('LastName:', contact.lastName, Icons.person),
+              _getInfoRow('Phone:', contact.phone, Icons.phone),
+              _getInfoRow('Email:', contact.email, Icons.email),
+              _getInfoRow('Notes:', contact.notes, Icons.description, false),
+            ],
+          ),
+        ),
+        padding: const EdgeInsets.all(24),
+      ),
+    );
+  }
+
+  Widget _getInfoRow(String title, String value, IconData icon,
       [hasDivider = true]) {
     return Column(
       children: [

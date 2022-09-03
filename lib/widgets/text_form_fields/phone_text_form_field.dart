@@ -34,7 +34,7 @@ class PhoneTextFormField extends StatelessWidget {
     if (value == null || value.isEmpty) {
       return phoneIsMandatory;
     }
-    if (value.startsWith('0') || value.length < 10) {
+    if ( value.length < 10) {
       return phoneIsNotValid;
     }
 

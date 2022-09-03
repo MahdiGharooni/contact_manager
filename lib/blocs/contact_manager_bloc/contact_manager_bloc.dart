@@ -65,9 +65,24 @@ class ContactManagerBloc
       final ResponseBase res =
           await networkRepository.editContact(event.contact);
       if (res.statusCode == 200) {
-        yield const EditContactSuccessfulState(msg: contactEditedSuccessfully);
+        final Contact newContact = Contact.fromJson(res.data);
+        _updateContactsList(newContact);
+        yield EditContactSuccessfulState(
+            contact: newContact, msg: contactEditedSuccessfully);
       } else {
         yield EditContactErrorState(msg: res.message ?? connectionError);
+      }
+    }
+  }
+
+  void _updateContactsList(Contact newContact) {
+    for (Contact element in contacts) {
+      if (element.id == newContact.id) {
+        element.firstName = newContact.firstName;
+        element.lastName = newContact.lastName;
+        element.email = newContact.email;
+        element.phone = newContact.phone;
+        element.notes = newContact.notes;
       }
     }
   }

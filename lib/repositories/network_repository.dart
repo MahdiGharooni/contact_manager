@@ -50,7 +50,7 @@ class NetworkRepository extends NetworkRepositoryBase {
 
 
   Future<ResponseBase> deleteContact(String id) async {
-    final dynamic res = await deleteJSON(
+    final Response res = await deleteJSON(
       path: '$contactsUrl/$id',
     );
 
@@ -65,7 +65,7 @@ class NetworkRepository extends NetworkRepositoryBase {
   }
 
     Future<ResponseBase> editContact(Contact contact) async {
-    final dynamic res = await putJSON(
+    final Response res = await putJSON(
       path: '$contactsUrl/${contact.id}',
       body:  {
         "firstName": contact.firstName ,
@@ -77,7 +77,7 @@ class NetworkRepository extends NetworkRepositoryBase {
     );
 
     if (res.statusCode == 200) {
-      return ResponseBase(data: {}, statusCode: res.statusCode);
+      return ResponseBase(data: jsonDecode(res.body), statusCode: res.statusCode);
     } else {
       return ResponseBase(
           data: {},
