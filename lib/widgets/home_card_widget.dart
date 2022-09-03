@@ -28,7 +28,7 @@ class HomeCardWidget extends StatelessWidget {
                 children: [
                   SizedBox(
                       child: Text(
-                        contact.firstName + contact.lastName,
+                        contact.firstName + ' ' + contact.lastName,
                         style: ThemeManager.getTheme()
                             .textTheme
                             .subtitle2!
