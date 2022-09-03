@@ -7,8 +7,10 @@ abstract class ContactManagerEvent extends Equatable {
   List<Object> get props => [];
 }
 
+/// get all contacts
 class GetAllContactsEvent extends ContactManagerEvent {}
 
+/// add new contact
 class AddContactEvent extends ContactManagerEvent {
   const AddContactEvent({
     required this.firstName,
@@ -25,4 +27,11 @@ class AddContactEvent extends ContactManagerEvent {
   final String phone;
   final String notes;
   final String image;
+}
+
+/// delete contact
+class DeleteContactEvent extends ContactManagerEvent {
+  const DeleteContactEvent({required this.id});
+
+  final String id;
 }

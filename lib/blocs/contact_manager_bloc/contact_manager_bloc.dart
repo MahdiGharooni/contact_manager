@@ -29,7 +29,7 @@ class ContactManagerBloc
 
       /// add contact
     } else if (event is AddContactEvent) {
-      yield AddContactsLoadingState();
+      yield AddContactLoadingState();
       final ResponseBase res = await networkRepository.addContact(
         event.firstName,
         event.lastName,
@@ -39,9 +39,22 @@ class ContactManagerBloc
         event.image,
       );
       if (res.statusCode == 201) {
-        yield const AddContactsSuccessfulState(msg: contactAddedSuccessfully);
+        yield const AddContactSuccessfulState(msg: contactAddedSuccessfully);
       } else {
-        yield AddContactsErrorState(msg: res.message ?? connectionError);
+        yield AddContactErrorState(msg: res.message ?? connectionError);
+      }
+    }
+
+    /// delete contact
+    else if (event is DeleteContactEvent) {
+      yield DeleteContactLoadingState();
+      final ResponseBase res = await networkRepository.deleteContact(
+        event.id,
+      );
+      if (res.statusCode == 200) {
+        yield const DeleteContactSuccessfulState(msg: contactDeletedSuccessfully);
+      } else {
+        yield DeleteContactErrorState(msg: res.message ?? connectionError);
       }
     }
   }

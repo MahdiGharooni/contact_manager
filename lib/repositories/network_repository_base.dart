@@ -10,6 +10,18 @@ class NetworkRepositoryBase {
     return res;
   }
 
+  Future<http.Response> deleteJSON<T>({
+    required String path,
+
+  }) async {
+    final res = await http.delete(
+      Uri.parse('https://stdevtask3-0510.restdb.io/rest' + path),
+      headers: {'APIKEY': 'a5b39dedacbffd95e1421020dae7c8b5ac3cc'},
+    );
+
+    return res;
+  }
+
   Future<dynamic> postJSON<T>({
     required String path,
     required Map<String, dynamic> body,

@@ -1,7 +1,7 @@
 import 'package:contact_manager/blocs/blocs.dart';
-import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/pages/contact_add_page.dart';
+import 'package:contact_manager/widgets/empty_page.dart';
 import 'package:contact_manager/widgets/home_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -23,32 +23,25 @@ class HomePage extends StatelessWidget {
           return Center(
             child: (state is GetAllContactsLoadingState)
                 ? const CircularProgressIndicator()
-                : (state is GetAllContactsSuccessfulState)
+                : _bloc.contacts.isNotEmpty
                     ? RefreshIndicator(
                         child: ListView.builder(
                           itemBuilder: (context, index) {
-                            final Contact _contact = state.contacts[index];
+                            final Contact _contact = _bloc.contacts[index];
                             return HomeCardWidget(
                                 contact: _contact, key: Key(_contact.id));
                           },
-                          itemCount: state.contacts.length,
+                          itemCount: _bloc.contacts.length,
                         ),
                         onRefresh: () async {
                           _bloc.add(GetAllContactsEvent());
                         },
                       )
-                    : Container(),
+                    : const EmptyPage(),
           );
         },
         listener: (context, state) {
-          if (state is AddContactsSuccessfulState) {
-            final snackBar = SnackBar(
-              content: Text(state.msg),
-              backgroundColor: ThemeManager.secondaryColor,
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            _bloc.add(GetAllContactsEvent());
-          }
+          //todo
         },
       ),
       floatingActionButton: FloatingActionButton.extended(

@@ -47,4 +47,20 @@ class NetworkRepository extends NetworkRepositoryBase {
           message: jsonDecode(res.body)['message'] ?? '');
     }
   }
+
+
+  Future<ResponseBase> deleteContact(String id) async {
+    final dynamic res = await deleteJSON(
+      path: '$contactsUrl/$id',
+    );
+
+    if (res.statusCode == 200) {
+      return ResponseBase(data: {}, statusCode: res.statusCode);
+    } else {
+      return ResponseBase(
+          data: {},
+          statusCode: res.statusCode,
+          message: jsonDecode(res.body)['message'] ?? '');
+    }
+  }
 }

@@ -26,16 +26,31 @@ class GetAllContactsSuccessfulState extends ContactManagerState {
 }
 
 /// add contact
-class AddContactsLoadingState extends ContactManagerState {}
+class AddContactLoadingState extends ContactManagerState {}
 
-class AddContactsErrorState extends ContactManagerState {
-  const AddContactsErrorState({required this.msg});
+class AddContactErrorState extends ContactManagerState {
+  const AddContactErrorState({required this.msg});
 
   final String msg;
 }
 
-class AddContactsSuccessfulState extends ContactManagerState {
-  const AddContactsSuccessfulState({required this.msg});
+class AddContactSuccessfulState extends ContactManagerState {
+  const AddContactSuccessfulState({required this.msg});
+
+  final String msg;
+}
+
+/// delete contact
+class DeleteContactLoadingState extends ContactManagerState {}
+
+class DeleteContactErrorState extends ContactManagerState {
+  const DeleteContactErrorState({required this.msg});
+
+  final String msg;
+}
+
+class DeleteContactSuccessfulState extends ContactManagerState {
+  const DeleteContactSuccessfulState({required this.msg});
 
   final String msg;
 }

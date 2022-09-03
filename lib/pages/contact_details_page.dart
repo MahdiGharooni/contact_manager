@@ -1,9 +1,11 @@
+import 'package:contact_manager/blocs/blocs.dart';
 import 'package:contact_manager/helpers/theme_manager.dart';
+import 'package:contact_manager/helpers/widget_utils.dart';
 import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/widgets/contact_avatar.dart';
 import 'package:flutter/material.dart';
 
-class ContactDetailsPage extends StatelessWidget {
+class ContactDetailsPage extends StatelessWidget with WidgetUtils{
   const ContactDetailsPage({
     required this.contact,
     required Key key,
@@ -17,33 +19,59 @@ class ContactDetailsPage extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.delete),
             onPressed: () {
-              //todo
+              BlocProvider.of<ContactManagerBloc>(context)
+                  .add(DeleteContactEvent(id: contact.id));
             },
           )
         ],
       ),
-      body: Card(
-        child: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ContactAvatar(
-                  url: contact.images.isNotEmpty ? contact.images[0] : '',
-                  size: 150,
-                  key: Key(contact.id),
-                ),
-                const SizedBox(height: 24),
-                _getInfo('FirstName:', contact.firstName, Icons.person),
-                _getInfo('LastName:', contact.lastName, Icons.person),
-                _getInfo('Phone:', contact.phone, Icons.phone),
-                _getInfo('Email:', contact.email, Icons.email),
-                _getInfo('Notes:', contact.notes, Icons.description, false),
-              ],
+      body: BlocListener<ContactManagerBloc , ContactManagerState>(
+        listener: (context, state) {
+          if(state is DeleteContactLoadingState){
+            showLoading(context);
+          }
+          if(state is DeleteContactErrorState){
+            hideLoading(context);
+            final snackBar = SnackBar(
+              content: Text(state.msg),
+              backgroundColor: ThemeManager.getTheme().errorColor,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+          if(state is DeleteContactSuccessfulState){
+            hideLoading(context);
+            final snackBar = SnackBar(
+              content: Text(state.msg),
+              backgroundColor: ThemeManager.secondaryColor,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            BlocProvider.of<ContactManagerBloc>(context).add(GetAllContactsEvent());
+            Navigator.pop(context);
+          }
+        },
+        child: Card(
+          child: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ContactAvatar(
+                    url: contact.images.isNotEmpty ? contact.images[0] : '',
+                    size: 150,
+                    key: Key(contact.id),
+                  ),
+                  const SizedBox(height: 24),
+                  _getInfo('FirstName:', contact.firstName, Icons.person),
+                  _getInfo('LastName:', contact.lastName, Icons.person),
+                  _getInfo('Phone:', contact.phone, Icons.phone),
+                  _getInfo('Email:', contact.email, Icons.email),
+                  _getInfo('Notes:', contact.notes, Icons.description, false),
+                ],
+              ),
             ),
+            padding: const EdgeInsets.all(24),
           ),
-          padding: const EdgeInsets.all(24),
         ),
       ),
     );

@@ -23,19 +23,26 @@ class ContactAddPage extends StatelessWidget with WidgetUtils {
       appBar: AppBar(),
       body: BlocListener<ContactManagerBloc, ContactManagerState>(
         listener: (context, state) {
-          if (state is AddContactsLoadingState) {
+          if (state is AddContactLoadingState) {
             showLoading(context);
           }
-          if (state is AddContactsErrorState) {
+          if (state is AddContactErrorState) {
             hideLoading(context);
-          final snackBar =   SnackBar(
+            final snackBar = SnackBar(
               content: Text(state.msg),
               backgroundColor: ThemeManager.getTheme().errorColor,
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
-          if (state is AddContactsSuccessfulState) {
+          if (state is AddContactSuccessfulState) {
             hideLoading(context);
+            final snackBar = SnackBar(
+              content: Text(state.msg),
+              backgroundColor: ThemeManager.secondaryColor,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            BlocProvider.of<ContactManagerBloc>(context)
+                .add(GetAllContactsEvent());
             Navigator.pop(context);
           }
         },
