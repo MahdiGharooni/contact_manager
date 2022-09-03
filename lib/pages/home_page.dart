@@ -1,7 +1,7 @@
 import 'package:contact_manager/blocs/blocs.dart';
 import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/pages/contact_add_page.dart';
-import 'package:contact_manager/widgets/empty_page.dart';
+import 'package:contact_manager/widgets/empty_widget.dart';
 import 'package:contact_manager/widgets/home_card_widget.dart';
 import 'package:flutter/material.dart';
 

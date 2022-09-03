@@ -3,9 +3,10 @@ import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/helpers/widget_utils.dart';
 import 'package:contact_manager/models/contact.dart';
 import 'package:contact_manager/widgets/contact_avatar.dart';
+import 'package:contact_manager/widgets/yes_no_dialog.dart';
 import 'package:flutter/material.dart';
 
-class ContactDetailsPage extends StatelessWidget with WidgetUtils{
+class ContactDetailsPage extends StatelessWidget with WidgetUtils {
   const ContactDetailsPage({
     required this.contact,
     required Key key,
@@ -21,18 +22,20 @@ class ContactDetailsPage extends StatelessWidget with WidgetUtils{
           IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () {
-              BlocProvider.of<ContactManagerBloc>(context)
-                  .add(DeleteContactEvent(id: contact.id));
+              showDialog(
+                context: context,
+                builder: (context) => YesNoDialog(id: contact.id),
+              );
             },
           )
         ],
       ),
-      body: BlocListener<ContactManagerBloc , ContactManagerState>(
+      body: BlocListener<ContactManagerBloc, ContactManagerState>(
         listener: (context, state) {
-          if(state is DeleteContactLoadingState){
+          if (state is DeleteContactLoadingState) {
             showLoading(context);
           }
-          if(state is DeleteContactErrorState){
+          if (state is DeleteContactErrorState) {
             hideLoading(context);
             final snackBar = SnackBar(
               content: Text(state.msg),
@@ -40,14 +43,15 @@ class ContactDetailsPage extends StatelessWidget with WidgetUtils{
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
-          if(state is DeleteContactSuccessfulState){
+          if (state is DeleteContactSuccessfulState) {
             hideLoading(context);
             final snackBar = SnackBar(
               content: Text(state.msg),
               backgroundColor: ThemeManager.secondaryColor,
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            BlocProvider.of<ContactManagerBloc>(context).add(GetAllContactsEvent());
+            BlocProvider.of<ContactManagerBloc>(context)
+                .add(GetAllContactsEvent());
             Navigator.pop(context);
           }
         },
