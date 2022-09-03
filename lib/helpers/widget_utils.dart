@@ -27,7 +27,7 @@ mixin WidgetUtils {
             ),
           ),
           onWillPop: () async {
-            return await false;
+            return false;
           },
         );
       },

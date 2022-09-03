@@ -5,6 +5,7 @@ import 'package:contact_manager/pages/home_page.dart';
 import 'package:contact_manager/widgets/text_form_fields/name_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   DateTime? _backPressedTime;

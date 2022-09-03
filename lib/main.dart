@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:contact_manager/blocs/blocs.dart';
 import 'package:contact_manager/helpers/theme_manager.dart';
-import 'package:contact_manager/pages/home_page.dart';
 import 'package:contact_manager/pages/offline_page.dart';
 import 'package:contact_manager/pages/splash_page.dart';
 import 'package:contact_manager/repositories/network_repository.dart';
@@ -39,9 +38,8 @@ class _MyAppState extends State<MyApp> {
       ),
       child: MaterialApp(
         home: _hasInternet
-            ?
-        const SplashPage()
-        // const SafeArea(child: HomePage(title: 'Contact Manager'))
+            ? const SplashPage()
+            // const SafeArea(child: HomePage(title: 'Contact Manager'))
             : const OfflinePage(title: 'Contact Manager'),
         theme: ThemeManager.getTheme(),
         debugShowCheckedModeBanner: false,

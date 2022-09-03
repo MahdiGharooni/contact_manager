@@ -19,7 +19,6 @@ class PhoneTextFormField extends StatelessWidget {
       maxLength: 12,
       validator: _validator,
       controller: controller,
-      textAlign: TextAlign.end,
       decoration: const InputDecoration(
         labelText: 'Phone Number',
         hintText: 'Phone Number',

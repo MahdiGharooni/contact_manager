@@ -8,6 +8,7 @@ import 'package:contact_manager/widgets/text_form_fields/name_text_form_field.da
 import 'package:contact_manager/widgets/text_form_fields/phone_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ContactEditPage extends StatelessWidget with WidgetUtils{
   ContactEditPage({required this.contact, Key? key}) : super(key: key);
 

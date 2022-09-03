@@ -1,6 +1,5 @@
 import 'package:contact_manager/helpers/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class EmailTextFormField extends StatelessWidget {
   const EmailTextFormField({

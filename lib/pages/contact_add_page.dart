@@ -1,5 +1,4 @@
 import 'package:contact_manager/blocs/blocs.dart';
-import 'package:contact_manager/blocs/contact_manager_bloc/contact_manager_bloc.dart';
 import 'package:contact_manager/helpers/strings.dart';
 import 'package:contact_manager/helpers/theme_manager.dart';
 import 'package:contact_manager/helpers/widget_utils.dart';

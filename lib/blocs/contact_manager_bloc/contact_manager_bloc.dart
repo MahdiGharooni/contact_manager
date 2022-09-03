@@ -87,9 +87,9 @@ class ContactManagerBloc
     }
   }
 
-  List<Contact> _contacts = [];
+  List<Contact>? _contacts;
 
-  List<Contact> get contacts => _contacts;
+  List<Contact> get contacts => _contacts ?? [];
 
   set contacts(List<Contact> value) {
     _contacts = value;
