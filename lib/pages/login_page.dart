@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
                     NameTextFormField(
                       controller: _passController,
                       labelText: 'Password',
-                      obscure: false,
+                      obscure: true,
                     ),
                     const SizedBox(height: 8),
                     ElevatedButton(
